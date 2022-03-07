@@ -6,4 +6,5 @@ class App extends React.Component {
   }
 }
 
+// test
 export default App;
