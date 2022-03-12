@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
   constructor() {
@@ -8,8 +8,41 @@ class MusicCard extends React.Component {
     this.state = {
       loading: false,
       reloanding: false,
-
+      data2: [],
+      musicaFav: [],
     };
+  }
+
+  componentDidMount() {
+    this.getmusicas();
+  }
+
+  getmusicas = () => {
+    this.setState({
+      loading: true,
+    });
+    getFavoriteSongs().then((musicas) => {
+      this.setState({
+        musicaFav: musicas,
+        loading: false,
+      }, () => {
+        this.musicaFavCheck();
+      });
+    });
+  }
+
+  musicaFavCheck = () => {
+    const { trackId } = this.props;
+    const { musicaFav } = this.state;
+    console.log(musicaFav);
+    musicaFav.forEach((index) => {
+      console.log(index);
+      if (index.trackId === trackId) {
+        this.setState({
+          reloanding: true,
+        });
+      }
+    });
   }
 
   addFavoritas = () => {
@@ -34,6 +67,7 @@ class MusicCard extends React.Component {
     const {
       loading,
       reloanding,
+      data2,
     } = this.state;
     const { trackId } = artista;
     return (
@@ -44,6 +78,7 @@ class MusicCard extends React.Component {
         <audio data-testid="audio-component" src={ previewUrl } controls>
           <track kind="captions" />
           O seu navegador não suporta o elemento
+          {console.log(data2)}
           <code>audio</code>
         </audio>
         <form>

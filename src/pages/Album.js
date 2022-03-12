@@ -11,7 +11,7 @@ class Album extends React.Component {
       data2: [],
       collectionName: '',
       artistName: '',
-
+      carregando: false,
     };
   }
 
@@ -22,10 +22,8 @@ class Album extends React.Component {
   listaMusicas = () => {
     const { match } = this.props;
     const { id } = match.params;
-    console.log(this.props);
     this.setState({}, async () => {
       const arquivoMusica = await getMusics(id);
-      console.log(arquivoMusica);
       this.setState({
         data2: arquivoMusica,
         artistName: arquivoMusica[0].artistName,
@@ -35,7 +33,7 @@ class Album extends React.Component {
   }
 
   render() {
-    const { data2, artistName, collectionName } = this.state;
+    const { data2, artistName, collectionName, carregando } = this.state;
 
     return (
 
@@ -43,6 +41,7 @@ class Album extends React.Component {
         <Header />
         {data2.length > 0 && (
           <div>
+            { carregando && <p>Carregando...</p> }
             <p data-testid="artist-name">{ artistName }</p>
             <p data-testid="album-name">{ collectionName }</p>
             {data2.map((artista) => (
@@ -52,6 +51,8 @@ class Album extends React.Component {
                     trackName={ artista.trackName }
                     previewUrl={ artista.previewUrl }
                     artista={ artista }
+                    data2={ data2 }
+                    trackId={ artista.trackId }
                   />)}
               </div>
             ))}
