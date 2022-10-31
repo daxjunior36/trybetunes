@@ -46,10 +46,11 @@ class Login extends React.Component {
     const { user, boleano, loanding, reloanding } = this.state;
     return (
       <section>
-        { loanding === true ? <p>Carregando...</p> : (
-          <div data-testid="page-login">
+        { loanding === true ? <h2><p>Carregando...</p></h2> : (
+          <div className="input" data-testid="page-login">
             Login
             <input
+              className="input2"
               id=""
               type="text"
               name="user"
@@ -57,14 +58,16 @@ class Login extends React.Component {
               onChange={ this.handlerChange }
               data-testid="login-name-input"
             />
-            <button
-              type="submit"
-              disabled={ boleano }
-              data-testid="login-submit-button"
-              onClick={ this.dadosDigitados }
-            >
-              Entrar
-            </button>
+            <div className="button-sub">
+              <button
+                type="submit"
+                disabled={ boleano }
+                data-testid="login-submit-button"
+                onClick={ this.dadosDigitados }
+              >
+                Entrar
+              </button>
+            </div>
             { reloanding === true && (
               <Route exact path="/">
                 <Redirect to="/search" />

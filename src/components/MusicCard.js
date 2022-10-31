@@ -8,7 +8,6 @@ class MusicCard extends React.Component {
     this.state = {
       loading: false,
       reloanding: false,
-      data2: [],
       musicaFav: [],
     };
   }
@@ -67,7 +66,6 @@ class MusicCard extends React.Component {
     const {
       loading,
       reloanding,
-      data2,
     } = this.state;
     const { trackId } = artista;
     return (
@@ -78,7 +76,7 @@ class MusicCard extends React.Component {
         <audio data-testid="audio-component" src={ previewUrl } controls>
           <track kind="captions" />
           O seu navegador não suporta o elemento
-          {console.log(data2)}
+          <div className="audios"> </div>
           <code>audio</code>
         </audio>
         <form>
@@ -86,7 +84,7 @@ class MusicCard extends React.Component {
           <label
             htmlFor="Favorita"
           >
-            Favorita
+            <div className="favorita">Favorita</div>
             <input
               type="checkbox"
               name=""

@@ -47,7 +47,7 @@ class Search extends React.Component {
   render() {
     const { user, boleano, loanding, data, userGuardado } = this.state;
     return (
-      <div data-testid="page-search">
+      <div className="foto-album" data-testid="page-search">
         <Header />
         { loanding === true ? <p>Carregando...</p> : (
           <section>
